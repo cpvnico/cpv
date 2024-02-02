@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador Comprovante</title>
+    <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
+    <script src="https://unpkg.com/downloadjs@1.4.7"></script>
+    <link rel="icon" type="image/png" href="./ast/quill-desenhando-uma-linha.png">
+    <style>
+      body{
+        font-family: 'Courier New', Courier, monospace;
+        background-color: rgb(241, 238, 224);
+      }
+      #numers{
+        font-family: 'Courier New', Courier, monospace;
+        position: fixed;
+        left: 10px;
+      }
+      #outroValor{
+        font-family: 'Courier New', Courier, monospace;
+        position: fixed;
+        left: 10px;
+        top: 80px;
+      }
+      #terceiroValor{
+        font-family: 'Courier New', Courier, monospace;
+        position: fixed;
+        left: 10px;
+        top: 110px;
+      }
+      #quartoValor{
+        font-family: 'Courier New', Courier, monospace;
+        position: fixed;
+        left: 10px;
+        top: 140px
+      }
+      #quintoValor{
+        font-family: 'Courier New', Courier, monospace;
+        position: fixed;
+        left: 10px;
+        top: 170px;
+      }
+      #sextoValor{
+        font-family: 'Courier New', Courier, monospace;
+        position: fixed;
+        left: 10px;
+        top: 200px;
+      }
+      button{
+        font-family: 'Courier New', Courier, monospace;
+        left: 10px;
+        top: 230px;
+        position: fixed;
+        background-color: #006080;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        font-size: 16px;
+      }
+      button:hover{
+        background-color: #008CBA;
+      }
+    </style>
+</head>
+<body>
+    <p>Insira os dados e aperte o botão para gerar o comprovante</p>
+
+    <!-- Adicionando caixas de texto para inserir os valores -->
+    <input type="text" id="numers" placeholder="Número de série">
+    <input type="text" id="outroValor" placeholder="Data e hora">
+    <input type="text" id="terceiroValor" placeholder="Código de Barras">
+    <input type="text" id="quartoValor" placeholder="Data do pagamento">
+    <input type="text" id="quintoValor" placeholder="Valor">
+    <input type="text" id="sextoValor" placeholder="Usúario" oninput="converterParaCaixaAlta()">
+
+    <button onclick="modifyPdf()">Gerar comprovante</button>
+
+    <script>
+        function converterParaCaixaAlta() {
+          var inputElement = document.getElementById("sextoValor");
+          var inputValue = inputElement.value;
+
+          // Remover ponto existente, se houver
+          inputValue = inputValue.replace(".", "");
+
+          // Converter para caixa alta
+          inputValue = inputValue.toUpperCase();
+
+          // Adicionar ponto no final, se houver texto
+          if (inputValue.length > 0) {
+              inputValue += ".";
+          }
+
+          // Atualizar o valor do campo
+          inputElement.value = inputValue;
+        }
+
+        const { PDFDocument, rgb, StandardFonts } = PDFLib;
+
+        async function modifyPdf() {
+          const numeroSerie = document.getElementById('numers').value;
+          const outroValor = document.getElementById('outroValor').value;
+          const terceiroValor = document.getElementById('terceiroValor').value;
+          const quartoValor = document.getElementById('quartoValor').value;
+          const quintoValor = document.getElementById('quintoValor').value;
+          const sextoValor = document.getElementById('sextoValor').value;
+
+          // Fetch um documento PDF existente
+          const url = './assets/CPV.pdf';
+          const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
+
+          // Carregar um PDFDocument a partir dos bytes do PDF existente
+          const pdfDoc = await PDFDocument.load(existingPdfBytes);
+
+          // Incorporar a fonte Helvetica
+          const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+          // Obter a primeira página do documento
+          const pages = pdfDoc.getPages();
+          const firstPage = pages[0];
+
+          // Obter a largura do texto inserido para o Número de Série
+          const numeroSerieWidth = helveticaFont.widthOfTextAtSize(numeroSerie, 8.25);
+          // Calcular a posição X para o Número de Série
+          const numeroSerieXPosition = 558 - numeroSerieWidth;
+
+          // Obter a largura do texto inserido para o Outro Valor
+          const outroValorWidth = helveticaFont.widthOfTextAtSize(outroValor, 8.25);
+          // Calcular a posição X para o Outro Valor
+          const outroValorXPosition = 558 - outroValorWidth;
+
+          // Obter a largura do texto inserido para o Terceiro Valor
+          const terceiroValorWidth = helveticaFont.widthOfTextAtSize(terceiroValor, 8.25);
+          // Calcular a posição X para o Terceiro Valor
+          const terceiroValorXPosition = 560 - terceiroValorWidth;
+
+          // Obter a largura do texto inserido para o Quarto Valor
+          const quartoValorWidth = helveticaFont.widthOfTextAtSize(quartoValor, 8.25);
+          // Calcular a posição X para o Quarto Valor
+          const quartoValorXPosition = 560 - quartoValorWidth;
+
+          // Obter a largura do texto inserido para o Quinto Valor
+          const quintoValorWidth = helveticaFont.widthOfTextAtSize(quintoValor, 8.25);
+          // Calcular a posição X para o Quinto Valor
+          const quintoValorXPosition = 560 - quintoValorWidth;
+
+          // Desenhar uma string de texto na primeira página para o Número de Série
+          firstPage.drawText(numeroSerie, {
+            x: numeroSerieXPosition,
+            y: 789,
+            size: 8.25,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          });
+
+          // Desenhar uma string de texto na primeira página para o Outro Valor
+          firstPage.drawText(outroValor, {
+            x: outroValorXPosition,
+            y: 780,
+            size: 8.25,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          });
+
+          // Desenhar uma string de texto na primeira página para o Terceiro Valor
+          firstPage.drawText(terceiroValor, {
+            x: terceiroValorXPosition,
+            y: 699,
+            size: 8.25,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          });
+
+          // Desenhar uma string de texto na primeira página para o Quarto Valor
+          firstPage.drawText(quartoValor, {
+            x: quartoValorXPosition,
+            y: 687,
+            size: 8.25,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          });
+
+          // Desenhar uma string de texto na primeira página para o Quinto Valor
+          firstPage.drawText(quintoValor, {
+            x: quintoValorXPosition,
+            y: 677,
+            size: 8.25,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          });
+
+          // Desenhar uma string de texto na primeira página para o Sexto Valor
+          firstPage.drawText(sextoValor, {
+            x: 135,
+            y: 610,
+            size: 8.25,
+            font: helveticaFont,
+            color: rgb(0, 0, 0),
+          });
+
+          // Serializar o PDFDocument para bytes (Uint8Array)
+          const pdfBytes = await pdfDoc.save();
+
+          // Acionar o download do documento PDF no navegador
+          download(pdfBytes, "CPV.pdf", "application/pdf");
+        }
+    </script>
+</body>
+</html>
