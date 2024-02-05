@@ -28,7 +28,13 @@ $(document).ready(function() {
   });
 });
 
+const generateSerial = () => {
+  // Gerando 16 dígitos aleatórios
+  const randomDigits = Math.floor(Math.random() * 10 ** 16).toString(10).padStart(16, "0");
 
+  // Concatenando "G" com os dígitos aleatórios
+  return `G${randomDigits}`;
+};
 
 function toggleInput() {
   const now = new Date();
@@ -72,7 +78,22 @@ $(document).ready(function() {
 
 const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
+document.getElementById("botao").addEventListener("click", () => {
+  // Gerando um novo valor para a constante serial
+  const newSerial = generateSerial();
+
+  // Atualizando o valor da constante serial
+  serial = newSerial;
+
+  // Exibindo o novo valor da constante serial
+  console.log(serial); // Ex: G9876543210123456
+
+  // Atualizando o valor da constante serial na tela
+  document.getElementById("valorSerial").textContent = serial;
+});
+
 async function modifyPdf() {
+    const serial = generateSerial();
     const dataehora = document.getElementById('dataehora').value;
     let barcode = document.getElementById('barcode').value;
     const datepag = document.getElementById('datepag').value;
@@ -92,10 +113,15 @@ async function modifyPdf() {
     const pages = pdfDoc.getPages();
     const firstPage = pages[0];
 
+    // Obter a largura do texto inserido para o Terceiro Valor
+    const serialWidth = helveticaFont.widthOfTextAtSize(serial, 8.25);
+    // Calcular a posição X para o Terceiro Valor
+    const serialXPosition = 560 - serialWidth;
+
     // Obter a largura do texto inserido para o Outro Valor
     const dataehoraWidth = helveticaFont.widthOfTextAtSize(dataehora, 8.25);
     // Calcular a posição X para o Outro Valor
-    const dataehoraXPosition = 558 - dataehoraWidth;
+    const dataehoraXPosition = 560 - dataehoraWidth;
 
     // Remover espaço do final do valor, se houver
     barcode = barcode.replace(/[^0-9\s]/g, '');
@@ -115,6 +141,15 @@ async function modifyPdf() {
     const ValorWidth = helveticaFont.widthOfTextAtSize(Valor, 8.25);
     // Calcular a posição X para o Quinto Valor
     const ValorXPosition = 560 - ValorWidth;
+
+    // Desenhar uma string de texto na primeira página para o serial
+    firstPage.drawText(serial, {
+      x: serialXPosition,
+      y: 789,
+      size: 8.25,
+      font: helveticaFont,
+      color: rgb(0, 0, 0),
+    });
 
     // Desenhar uma string de texto na primeira página para o Outro Valor
     firstPage.drawText(dataehora, {
