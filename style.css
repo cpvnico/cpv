@@ -1,0 +1,54 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(241, 238, 224);
+}
+#numers{
+    font-family: 'Courier New', Courier, monospace;
+    position: fixed;
+    left: 10px;
+}
+#outroValor{
+    font-family: 'Courier New', Courier, monospace;
+    position: fixed;
+    left: 10px;
+    top: 80px;
+}
+#terceiroValor{
+    font-family: 'Courier New', Courier, monospace;
+    position: fixed;
+    left: 10px;
+    top: 110px;
+}
+#quartoValor{
+    font-family: 'Courier New', Courier, monospace;
+    position: fixed;
+    left: 10px;
+    top: 140px
+}
+#quintoValor{
+    font-family: 'Courier New', Courier, monospace;
+    position: fixed;
+    left: 10px;
+    top: 170px;
+}
+#sextoValor{
+    font-family: 'Courier New', Courier, monospace;
+    position: fixed;
+    left: 10px;
+    top: 200px;
+}
+button{
+    font-family: 'Courier New', Courier, monospace;
+    left: 10px;
+    top: 230px;
+    position: fixed;
+    background-color: #006080;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+}
+button:hover{
+    background-color: #008CBA;
+}
