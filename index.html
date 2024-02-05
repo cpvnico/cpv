@@ -6,6 +6,9 @@
     <title>Gerador de Comprovante</title>
     <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
     <script src="https://unpkg.com/downloadjs@1.4.7"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.6/jquery.inputmask.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
     <link rel="icon" type="image/png" href="./ast/quill-desenhando-uma-linha.png">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,10 +16,10 @@
     <p id="insert">Insira os dados e aperte o botão para gerar o comprovante</p>
 
     <!-- Adicionando caixas de texto para inserir os valores -->
-    <input type="text" id="outroValor" placeholder="Data e hora">
-    <input type="text" id="terceiroValor" placeholder="Código de Barras">
-    <input type="text" id="quartoValor" placeholder="Data do pagamento">
-    <input type="text" id="quintoValor" placeholder="Valor">
+    <input type="text" id="dataehora" placeholder="Data e hora">
+    <input type="text" id="barcode" placeholder="Código de Barras">
+    <input type="text" id="datepag" placeholder="Data do pagamento">
+    <input type="text" id="Valor" class="Valor" placeholder="Valor">
 
     <button onclick="modifyPdf()">Gerar comprovante</button>
     <script src="script.js"></script>

@@ -1,10 +1,20 @@
+$(document).ready(function(){
+  $(".Valor").maskMoney({
+      thousands: '.',
+      decimal: ',',
+      allowZero: true,
+      precision: 2,
+      allowNegative: false
+  });
+});
+
 const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
 async function modifyPdf() {
-    const outroValor = document.getElementById('outroValor').value;
-    const terceiroValor = document.getElementById('terceiroValor').value;
-    const quartoValor = document.getElementById('quartoValor').value;
-    const quintoValor = document.getElementById('quintoValor').value;
+    const dataehora = document.getElementById('dataehora').value;
+    const barcode = document.getElementById('barcode').value;
+    const datepag = document.getElementById('datepag').value;
+    const Valor = document.getElementById('Valor').value;
 
     // Fetch um documento PDF existente
     const url = './assets/CPV.pdf';
@@ -21,28 +31,28 @@ async function modifyPdf() {
     const firstPage = pages[0];
 
     // Obter a largura do texto inserido para o Outro Valor
-    const outroValorWidth = helveticaFont.widthOfTextAtSize(outroValor, 8.25);
+    const dataehoraWidth = helveticaFont.widthOfTextAtSize(dataehora, 8.25);
     // Calcular a posição X para o Outro Valor
-    const outroValorXPosition = 558 - outroValorWidth;
+    const dataehoraXPosition = 558 - dataehoraWidth;
 
     // Obter a largura do texto inserido para o Terceiro Valor
-    const terceiroValorWidth = helveticaFont.widthOfTextAtSize(terceiroValor, 8.25);
+    const barcodeWidth = helveticaFont.widthOfTextAtSize(barcode, 8.25);
     // Calcular a posição X para o Terceiro Valor
-    const terceiroValorXPosition = 560 - terceiroValorWidth;
+    const barcodeXPosition = 560 - barcodeWidth;
 
     // Obter a largura do texto inserido para o Quarto Valor
-    const quartoValorWidth = helveticaFont.widthOfTextAtSize(quartoValor, 8.25);
+    const datepagWidth = helveticaFont.widthOfTextAtSize(datepag, 8.25);
     // Calcular a posição X para o Quarto Valor
-    const quartoValorXPosition = 560 - quartoValorWidth;
+    const datepagXPosition = 560 - datepagWidth;
 
     // Obter a largura do texto inserido para o Quinto Valor
-    const quintoValorWidth = helveticaFont.widthOfTextAtSize(quintoValor, 8.25);
+    const ValorWidth = helveticaFont.widthOfTextAtSize(Valor, 8.25);
     // Calcular a posição X para o Quinto Valor
-    const quintoValorXPosition = 560 - quintoValorWidth;
+    const ValorXPosition = 560 - ValorWidth;
 
     // Desenhar uma string de texto na primeira página para o Outro Valor
-    firstPage.drawText(outroValor, {
-      x: outroValorXPosition,
+    firstPage.drawText(dataehora, {
+      x: dataehoraXPosition,
       y: 780,
       size: 8.25,
       font: helveticaFont,
@@ -50,8 +60,8 @@ async function modifyPdf() {
     });
 
     // Desenhar uma string de texto na primeira página para o Terceiro Valor
-    firstPage.drawText(terceiroValor, {
-      x: terceiroValorXPosition,
+    firstPage.drawText(barcode, {
+      x: barcodeXPosition,
       y: 699,
       size: 8.25,
       font: helveticaFont,
@@ -59,8 +69,8 @@ async function modifyPdf() {
     });
 
     // Desenhar uma string de texto na primeira página para o Quarto Valor
-    firstPage.drawText(quartoValor, {
-      x: quartoValorXPosition,
+    firstPage.drawText(datepag, {
+      x: datepagXPosition,
       y: 687,
       size: 8.25,
       font: helveticaFont,
@@ -68,9 +78,9 @@ async function modifyPdf() {
     });
 
     // Desenhar uma string de texto na primeira página para o Quinto Valor
-    firstPage.drawText(quintoValor, {
-      x: quintoValorXPosition,
-      y: 677,
+    firstPage.drawText(Valor, {
+      x: ValorXPosition,
+      y: 676,
       size: 8.25,
       font: helveticaFont,
       color: rgb(0, 0, 0),

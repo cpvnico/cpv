@@ -7,22 +7,22 @@ body{
     position: absolute;
     font-family: 'Courier New', Courier, monospace;
 }
-#outroValor{
+#dataehora{
     font-family: 'Courier New', Courier, monospace;
     position: absolute;
     top: 60px;
 }
-#terceiroValor{
+#barcode{
     font-family: 'Courier New', Courier, monospace;
     position: absolute;
     top: 90px;
 }
-#quartoValor{
+#datepag{
     font-family: 'Courier New', Courier, monospace;
     position: absolute;
     top: 120px
 }
-#quintoValor{
+#Valor{
     font-family: 'Courier New', Courier, monospace;
     position: absolute;
     top: 150px;
