@@ -8,6 +8,14 @@ $(document).ready(function(){
   });
 });
 
+$(document).ready(function(){
+  // Aplicar a máscara de data e hora enquanto o usuário digita
+  $("#dataehora").inputmask('99/99/9999 99:99:99', {
+      placeholder: 'DD/MM/YYYY HH:mm:ss',
+      clearIncomplete: true
+  });
+});
+
 const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
 async function modifyPdf() {
