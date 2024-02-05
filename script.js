@@ -20,6 +20,16 @@ $(document).ready(function(){
   });
 });
 
+$(document).ready(function() {
+  $("#barcode").on("input", function() {
+    // Permitir apenas números e espaço
+    var regex = /[^0-9 ]/g;
+    $(this).val($(this).val().replace(regex, ""));
+  });
+});
+
+
+
 function toggleInput() {
   const now = new Date();
   const formattedDateTime = now.toLocaleDateString() + " " + now.toLocaleTimeString();
@@ -85,6 +95,7 @@ async function modifyPdf() {
     const dataehoraXPosition = 558 - dataehoraWidth;
 
     // Remover espaço do final do valor, se houver
+    barcode = barcode.replace(/[^0-9\s]/g, '');
     barcode = barcode.replace(/\s+$/, '');
 
     // Obter a largura do texto inserido para o Terceiro Valor
