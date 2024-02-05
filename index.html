@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p>Insira os dados e aperte o botão para gerar o comprovante</p>
+    <p id="insert">Insira os dados e aperte o botão para gerar o comprovante</p>
 
     <!-- Adicionando caixas de texto para inserir os valores -->
     <input type="text" id="numers" placeholder="Número de série">
@@ -21,6 +21,7 @@
     <input type="text" id="sextoValor" placeholder="Usúario" oninput="converterParaCaixaAlta()">
 
     <button onclick="modifyPdf()">Gerar comprovante</button>
+    <p id="ver">Versão: 1.2</p>
     <script src="script.js"></script>
 </body>
 </html>
