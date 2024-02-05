@@ -2,53 +2,16 @@ function converterParaCaixaAlta() {
   var inputElement = document.getElementById("sextoValor");
   var inputValue = inputElement.value;
 
-  // Remover ponto existente, se houver
-  inputValue = inputValue.replace(".", "");
-
   // Converter para caixa alta
   inputValue = inputValue.toUpperCase();
 
-  // Armazenar a posição do cursor
-  var cursorPos = inputElement.selectionStart;
-
-  // Adicionar ponto no final se cursor não estiver no final
-  if (cursorPos !== inputValue.length) {
-    inputValue = inputValue.slice(0, cursorPos) + "." + inputValue.slice(cursorPos);
-  }
-
-  // Atualizar o valor do campo e a posição do cursor
+  // Atualizar o valor do campo
   inputElement.value = inputValue;
-  inputElement.selectionStart = cursorPos + 1;
-
-  // Adicionar evento focus para remover o ponto
-  inputElement.addEventListener("focus", function() {
-    // Remover ponto se o campo estiver vazio
-    if (inputValue === "") {
-      return;
-    }
-
-    // Armazenar o último caractere
-    var lastChar = inputValue.charAt(inputValue.length - 1);
-
-    // Remover ponto se for o último caractere
-    if (lastChar === ".") {
-      inputValue = inputValue.slice(0, -1);
-      inputElement.value = inputValue;
-    }
-  });
-
-  // Adicionar evento blur para adicionar o ponto
-  inputElement.addEventListener("blur", function() {
-    // Adicionar ponto se houver texto e cursor não estiver no final
-    if (inputValue.length > 0 && inputElement.selectionStart !== inputValue.length) {
-      inputValue += ".";
-      inputElement.value = inputValue;
-    }
-  });
 }
 
 // Chamar a função para converter o texto para caixa alta
 converterParaCaixaAlta();
+
 
 
 const { PDFDocument, rgb, StandardFonts } = PDFLib;
@@ -146,7 +109,7 @@ async function modifyPdf() {
     });
 
     // Desenhar uma string de texto na primeira página para o Sexto Valor
-    firstPage.drawText(sextoValor, {
+    firstPage.drawText(sextoValor + ".", {
       x: 135,
       y: 610,
       size: 8.25,
