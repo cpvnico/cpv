@@ -9,8 +9,18 @@ function converterParaCaixaAlta() {
   inputElement.value = inputValue;
 }
 
-// Chamar a função para converter o texto para caixa alta
-converterParaCaixaAlta();
+// Adicionar evento blur para remover espaço no último caractere
+var inputElement = document.getElementById("sextoValor");
+inputElement.addEventListener("blur", function() {
+  var inputValue = inputElement.value;
+
+  // Remover último caractere se for um espaço
+  if (inputValue.charAt(inputValue.length - 1) === " ") {
+    inputValue = inputValue.slice(0, -1);
+    inputElement.value = inputValue.toUpperCase(); // Converter para caixa alta ao remover espaço
+  }
+});
+
 
 
 
