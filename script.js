@@ -37,7 +37,7 @@ function toggleInput() {
 
   if ($("#disableInput").is(":checked")) {
       // Adicionar 1 minuto ao valor atual nos minutos
-      now.setMinutes(now.getMinutes() + 1);
+      now.setMinutes(now.getMinutes() + 2);
       const formattedDateTimeWithMinutes = now.toLocaleDateString() + " " + now.toLocaleTimeString();
       $("#dataehora").val(formattedDateTimeWithMinutes);
       $("#dataehora").prop("disabled", true);
@@ -57,13 +57,16 @@ function toggleInput() {
 }
 
 
-$(document).ready(function(){
+$(document).ready(function() {
+  // Exibir "0,00" no campo Valor quando a página for carregada
+  $("#Valor").val("0,00");
+
   $(".Valor").maskMoney({
-      thousands: '.',
-      decimal: ',',
-      allowZero: true,
-      precision: 2,
-      allowNegative: false
+    thousands: '.',
+    decimal: ',',
+    allowZero: true,
+    precision: 2,
+    allowNegative: false
   });
 });
 
