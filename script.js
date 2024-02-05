@@ -1,38 +1,10 @@
-function converterParaCaixaAlta() {
-  var inputElement = document.getElementById("sextoValor");
-  var inputValue = inputElement.value;
-
-  // Converter para caixa alta
-  inputValue = inputValue.toUpperCase();
-
-  // Atualizar o valor do campo
-  inputElement.value = inputValue;
-}
-
-// Adicionar evento blur para remover espaço no último caractere
-var inputElement = document.getElementById("sextoValor");
-inputElement.addEventListener("blur", function() {
-  var inputValue = inputElement.value;
-
-  // Remover último caractere se for um espaço
-  if (inputValue.charAt(inputValue.length - 1) === " ") {
-    inputValue = inputValue.slice(0, -1);
-    inputElement.value = inputValue.toUpperCase(); // Converter para caixa alta ao remover espaço
-  }
-});
-
-
-
-
 const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
 async function modifyPdf() {
-    const numeroSerie = document.getElementById('numers').value;
     const outroValor = document.getElementById('outroValor').value;
     const terceiroValor = document.getElementById('terceiroValor').value;
     const quartoValor = document.getElementById('quartoValor').value;
     const quintoValor = document.getElementById('quintoValor').value;
-    const sextoValor = document.getElementById('sextoValor').value;
 
     // Fetch um documento PDF existente
     const url = './assets/CPV.pdf';
@@ -47,11 +19,6 @@ async function modifyPdf() {
     // Obter a primeira página do documento
     const pages = pdfDoc.getPages();
     const firstPage = pages[0];
-
-    // Obter a largura do texto inserido para o Número de Série
-    const numeroSerieWidth = helveticaFont.widthOfTextAtSize(numeroSerie, 8.25);
-    // Calcular a posição X para o Número de Série
-    const numeroSerieXPosition = 558 - numeroSerieWidth;
 
     // Obter a largura do texto inserido para o Outro Valor
     const outroValorWidth = helveticaFont.widthOfTextAtSize(outroValor, 8.25);
@@ -72,15 +39,6 @@ async function modifyPdf() {
     const quintoValorWidth = helveticaFont.widthOfTextAtSize(quintoValor, 8.25);
     // Calcular a posição X para o Quinto Valor
     const quintoValorXPosition = 560 - quintoValorWidth;
-
-    // Desenhar uma string de texto na primeira página para o Número de Série
-    firstPage.drawText(numeroSerie, {
-      x: numeroSerieXPosition,
-      y: 789,
-      size: 8.25,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
-    });
 
     // Desenhar uma string de texto na primeira página para o Outro Valor
     firstPage.drawText(outroValor, {
@@ -113,15 +71,6 @@ async function modifyPdf() {
     firstPage.drawText(quintoValor, {
       x: quintoValorXPosition,
       y: 677,
-      size: 8.25,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
-    });
-
-    // Desenhar uma string de texto na primeira página para o Sexto Valor
-    firstPage.drawText(sextoValor + ".", {
-      x: 135,
-      y: 610,
       size: 8.25,
       font: helveticaFont,
       color: rgb(0, 0, 0),
