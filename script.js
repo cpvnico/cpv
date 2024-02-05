@@ -1,18 +1,59 @@
 $(document).ready(function(){
+  // Ativar/desativar a edição do input quando a página é carregada
+  toggleInput();
+
+  // Ativar/desativar a edição do input quando o switch é clicado
+  $("#disableInput").on("change", function() {
+      toggleInput();
+  });
+
+  // Aplicar a máscara de data e hora enquanto o usuário digita
+  $("#dataehora").inputmask('99/99/9999 99:99:99', {
+      placeholder: 'DD/MM/YYYY HH:mm:ss',
+      clearIncomplete: true
+  });
+
+  // Aplicar a máscara de data enquanto o usuário digita
+  $("#datepag").inputmask('99/99/9999', {
+      placeholder: 'DD/MM/YYYY',
+      clearIncomplete: true
+  });
+});
+
+function toggleInput() {
+  const now = new Date();
+  const formattedDateTime = now.toLocaleDateString() + " " + now.toLocaleTimeString();
+  const formattedDate = now.toLocaleDateString();
+
+  if ($("#disableInput").is(":checked")) {
+      // Adicionar 1 minuto ao valor atual nos minutos
+      now.setMinutes(now.getMinutes() + 1);
+      const formattedDateTimeWithMinutes = now.toLocaleDateString() + " " + now.toLocaleTimeString();
+      $("#dataehora").val(formattedDateTimeWithMinutes);
+      $("#dataehora").prop("disabled", true);
+
+      // Definir a data atual no input
+      $("#datepag").val(formattedDate);
+      $("#datepag").prop("disabled", true);
+  } else {
+      // Definir a data e hora atual no input
+      $("#dataehora").val(formattedDateTime);
+      $("#dataehora").prop("disabled", false);
+
+      // Definir a data atual no input
+      $("#datepag").val(formattedDate);
+      $("#datepag").prop("disabled", false);
+  }
+}
+
+
+$(document).ready(function(){
   $(".Valor").maskMoney({
       thousands: '.',
       decimal: ',',
       allowZero: true,
       precision: 2,
       allowNegative: false
-  });
-});
-
-$(document).ready(function(){
-  // Aplicar a máscara de data e hora enquanto o usuário digita
-  $("#dataehora").inputmask('99/99/9999 99:99:99', {
-      placeholder: 'DD/MM/YYYY HH:mm:ss',
-      clearIncomplete: true
   });
 });
 

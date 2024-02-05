@@ -27,6 +27,12 @@ body{
     position: absolute;
     top: 150px;
 }
+#disableInput{
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    top: 61px;
+    left: 180px;
+}
 button{
     font-family: 'Courier New', Courier, monospace;
     top: 180px;
