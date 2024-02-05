@@ -61,7 +61,7 @@ const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
 async function modifyPdf() {
     const dataehora = document.getElementById('dataehora').value;
-    const barcode = document.getElementById('barcode').value;
+    let barcode = document.getElementById('barcode').value;
     const datepag = document.getElementById('datepag').value;
     const Valor = document.getElementById('Valor').value;
 
@@ -83,6 +83,9 @@ async function modifyPdf() {
     const dataehoraWidth = helveticaFont.widthOfTextAtSize(dataehora, 8.25);
     // Calcular a posição X para o Outro Valor
     const dataehoraXPosition = 558 - dataehoraWidth;
+
+    // Remover espaço do final do valor, se houver
+    barcode = barcode.replace(/\s+$/, '');
 
     // Obter a largura do texto inserido para o Terceiro Valor
     const barcodeWidth = helveticaFont.widthOfTextAtSize(barcode, 8.25);
