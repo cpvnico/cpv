@@ -1,3 +1,12 @@
+const botao = document.querySelector('.meu-botao');
+    
+    botao.addEventListener('click', () => {
+      botao.classList.toggle('ativo');
+      setTimeout(() => {
+        botao.classList.toggle('ativo');
+      }, 1500); // Tempo igual ao tempo de transição em segundos
+    });
+
 $(document).ready(function(){
   // Ativar/desativar a edição do input quando a página é carregada
   toggleInput();

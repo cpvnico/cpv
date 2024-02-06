@@ -96,20 +96,22 @@ form{
     width: 100%;
 }
 
-form input[type="button"] {
+.meu-botao {
     margin-top: 2rem;
     padding: 0.4rem;
-    background: rgb(175, 174, 164);
-    cursor: pointer;
+    background-color: rgb(175, 174, 164); /* cor padrão */
+    border: none;
     color: rgba(0, 0, 0, 0.7);
     font-size: 0.9rem;
-    transition: all 0.3s ease;
+    cursor: pointer;
     border-radius: 2px;
+    background-image: linear-gradient(to left, rgb(165, 164, 154) 50%, rgb(175, 174, 164) 50%);
+    background-size: 200% 100%;
 }
-
-form input[type="button"]:hover {
-    letter-spacing: 0.4s;
-    background: rgb(212, 211, 197);
+  
+.meu-botao.ativo {
+    transition: background-position 1.5s cubic-bezier(1, 0.8, 0.2, 1); /* Transição com curva personalizada */
+    background-position: -100% 0;
 }
 
 /* Estilo básico do toggle switch */
