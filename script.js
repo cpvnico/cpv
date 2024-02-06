@@ -1,4 +1,4 @@
-const botao = document.querySelector('.meu-botao');
+const botao = document.querySelector('.meu-botao1');
     
     botao.addEventListener('click', () => {
       botao.classList.toggle('ativo');

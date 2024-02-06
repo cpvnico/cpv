@@ -96,7 +96,7 @@ form{
     width: 100%;
 }
 
-.meu-botao {
+.meu-botao1 {
     margin-top: 2rem;
     padding: 0.4rem;
     background-color: rgb(175, 174, 164); /* cor padrão */
@@ -109,7 +109,7 @@ form{
     background-size: 200% 100%;
 }
   
-.meu-botao.ativo {
+.meu-botao1.ativo {
     transition: background-position 1.5s cubic-bezier(1, 0.8, 0.2, 1); /* Transição com curva personalizada */
     background-position: -100% 0;
 }
