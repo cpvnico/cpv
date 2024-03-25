@@ -1,3 +1,11 @@
+
+function enableButton() {
+  // Selecionar o botão
+  const botao = document.getElementById('botao');
+  // Ativar o botão
+  botao.disabled = false;
+}
+
 const botao = document.querySelector('.meu-botao1');
     
     botao.addEventListener('click', () => {

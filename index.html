@@ -37,8 +37,10 @@
                 <input type="text" id="Valor" class="Valor" placeholder="0,00" autocomplete="off">
                 <div class="underline"></div>
             </div>
-
-            <input type="button" value="Gerar comprovante" onclick="modifyPdf()" id="botao" class="meu-botao1">
+            <div id="captcha">
+                <div class="h-captcha" data-sitekey="55738b75-e3e6-4df6-bae3-5021f82710ba" data-callback="enableButton"></div>
+            </div>
+            <input type="button" value="Gerar comprovante" onclick="modifyPdf()" id="botao" class="meu-botao1" disabled>
         </form>
         <div class="footer">
             <span>preenchimento automatico:</span>
@@ -48,6 +50,7 @@
             </label>
         </div>
     </main>
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
     <script src="script.js"></script>
 </body>
 </html>
